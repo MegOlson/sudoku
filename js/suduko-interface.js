@@ -4,9 +4,9 @@ import { Sudoku } from './../js/suduko.js';
 $(document).ready(function(){
   gridMaker();
   function gridMaker(){
-    for(var i = 1; i < 10; i++){
+    for(let i = 1; i < 10; i++){
       $('.sudokuGrid').append('<div class="col-sm-12 col'+i+'"></div>');
-      for(var j = 1; j < 10; j++){
+      for(let j = 1; j < 10; j++){
         $('#gridSelector').append('<option value="grid'+i+'-'+j+'">Row '+i+' col '+j+' </option>');
         $('.col'+i).append('<li class="grid'+i+'-'+j+'"></li>');
       }
@@ -14,16 +14,16 @@ $(document).ready(function(){
   };
 
   function getColumnGridArray(){
-    var outerArray = [];
-    var innerArray = [];
-    var value;
-    for(var j = 1; j < 10; j++){
+    let outerArray = [];
+    let innerArray = [];
+    let value;
+    for(let j = 1; j < 10; j++){
       innerArray =[];
-      for(var i = 1; i < 10; i++){
-        if($('.grid'+i+'-'+j).text() == ""){
+      for(let i = 1; i < 10; i++){
+        if($(`.grid${i}-${j}`).text() == ""){
           value = 0;
         }else{
-          value = $('.grid'+i+'-'+j).text();
+          value = $(`.grid${i}-${j}`).text();
         }
         innerArray.push(value);
       }
@@ -33,16 +33,16 @@ $(document).ready(function(){
   };
 
   function getRowGridArray(){
-    var outerArray = [];
-    var innerArray = [];
-    var value;
-    for(var j = 1; j < 10; j++){
+    let outerArray = [];
+    let innerArray = [];
+    let value;
+    for(let j = 1; j < 10; j++){
       innerArray =[];
-      for(var i = 1; i < 10; i++){
-        if($('.grid'+j+'-'+i).text() == ""){
+      for(let i = 1; i < 10; i++){
+        if($(`.grid${j}-${i}`).text() == ""){
           value = 0;
         }else{
-          value = $('.grid'+j+'-'+i).text();
+          value = $(`.grid${j}-${i}`).text();
         }
         innerArray.push(value);
       }
@@ -54,19 +54,19 @@ $(document).ready(function(){
 
   $('#display').click(function(event){
     event.preventDefault();
-     var gridSelector = $('#gridSelector').val();
-     var gridDigit = $('#gridDigit').val();
-     $("."+gridSelector).text(gridDigit);
+     let gridSelector = $('#gridSelector').val();
+     let gridDigit = $('#gridDigit').val();
+     $(`.${gridSelector}`).text(gridDigit);
   });
 
   $('#verify').click(function(event){
     event.preventDefault();
-    var sudoku = new Sudoku();
-    var result;
-    var columnGridArray = getColumnGridArray();
-    var rowGridArray = getRowGridArray();
-    var resultForRow = sudoku.verifyArray(rowGridArray);
-    var resultForColumn = sudoku.verifyArray(columnGridArray);
+    let sudoku = new Sudoku();
+    let result;
+    let columnGridArray = getColumnGridArray();
+    let rowGridArray = getRowGridArray();
+    let resultForRow = sudoku.verifyArray(rowGridArray);
+    let resultForColumn = sudoku.verifyArray(columnGridArray);
     if (resultForRow == "Unvalid" || resultForColumn =="Unvalid"){
       $('#result').append("Its an Unvalid Sudoku");
     }else{

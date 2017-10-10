@@ -58,7 +58,7 @@ $(document).ready(function () {
   function getColumnGridArray() {
     var outerArray = [];
     var innerArray = [];
-    var value;
+    var value = void 0;
     for (var j = 1; j < 10; j++) {
       innerArray = [];
       for (var i = 1; i < 10; i++) {
@@ -77,7 +77,7 @@ $(document).ready(function () {
   function getRowGridArray() {
     var outerArray = [];
     var innerArray = [];
-    var value;
+    var value = void 0;
     for (var j = 1; j < 10; j++) {
       innerArray = [];
       for (var i = 1; i < 10; i++) {
@@ -97,13 +97,13 @@ $(document).ready(function () {
     event.preventDefault();
     var gridSelector = $('#gridSelector').val();
     var gridDigit = $('#gridDigit').val();
-    $("." + gridSelector).text(gridDigit);
+    $('.' + gridSelector).text(gridDigit);
   });
 
   $('#verify').click(function (event) {
     event.preventDefault();
     var sudoku = new _suduko.Sudoku();
-    var result;
+    var result = void 0;
     var columnGridArray = getColumnGridArray();
     var rowGridArray = getRowGridArray();
     var resultForRow = sudoku.verifyArray(rowGridArray);
