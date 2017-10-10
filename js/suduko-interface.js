@@ -1,4 +1,5 @@
-var Sudoku = require('./../js/suduko.js').sudokuModule;
+import { Sudoku } from './../js/suduko.js';
+
 
 $(document).ready(function(){
   gridMaker();
@@ -64,8 +65,8 @@ $(document).ready(function(){
     var result;
     var columnGridArray = getColumnGridArray();
     var rowGridArray = getRowGridArray();
-    resultForRow = sudoku.verifyArray(rowGridArray);
-    resultForColumn = sudoku.verifyArray(columnGridArray);
+    var resultForRow = sudoku.verifyArray(rowGridArray);
+    var resultForColumn = sudoku.verifyArray(columnGridArray);
     if (resultForRow == "Unvalid" || resultForColumn =="Unvalid"){
       $('#result').append("Its an Unvalid Sudoku");
     }else{

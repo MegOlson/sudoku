@@ -1,32 +1,47 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 "use strict";
 
-function Sudoku() {}
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-Sudoku.prototype.verifyArray = function (array) {
-  var arr = [];
-  var returnData = "Valid";
-  array.forEach(function (innerArray) {
-    arr = [];
-    innerArray.forEach(function (innerArrayValue) {
-      if (innerArrayValue != 0) {
-        if (arr.indexOf(innerArrayValue) > -1) {
-          returnData = "Unvalid";
-        } else {
-          arr.push(innerArrayValue);
-        }
-      }
-    });
-  });
-  return returnData;
-};
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-exports.sudokuModule = Sudoku;
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Sudoku = exports.Sudoku = function () {
+  function Sudoku() {
+    _classCallCheck(this, Sudoku);
+  }
+
+  _createClass(Sudoku, [{
+    key: "verifyArray",
+    value: function verifyArray(array) {
+      var arr = [];
+      var returnData = "Valid";
+      array.forEach(function (innerArray) {
+        arr = [];
+        innerArray.forEach(function (innerArrayValue) {
+          if (innerArrayValue != 0) {
+            if (arr.indexOf(innerArrayValue) > -1) {
+              returnData = "Unvalid";
+            } else {
+              arr.push(innerArrayValue);
+            }
+          }
+        });
+      });
+      return returnData;
+    }
+  }]);
+
+  return Sudoku;
+}();
 
 },{}],2:[function(require,module,exports){
 'use strict';
 
-var Sudoku = require('./../js/suduko.js').sudokuModule;
+var _suduko = require('./../js/suduko.js');
 
 $(document).ready(function () {
   gridMaker();
@@ -87,12 +102,12 @@ $(document).ready(function () {
 
   $('#verify').click(function (event) {
     event.preventDefault();
-    var sudoku = new Sudoku();
+    var sudoku = new _suduko.Sudoku();
     var result;
     var columnGridArray = getColumnGridArray();
     var rowGridArray = getRowGridArray();
-    resultForRow = sudoku.verifyArray(rowGridArray);
-    resultForColumn = sudoku.verifyArray(columnGridArray);
+    var resultForRow = sudoku.verifyArray(rowGridArray);
+    var resultForColumn = sudoku.verifyArray(columnGridArray);
     if (resultForRow == "Unvalid" || resultForColumn == "Unvalid") {
       $('#result').append("Its an Unvalid Sudoku");
     } else {
