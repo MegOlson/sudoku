@@ -51,6 +51,45 @@ $(document).ready(function(){
     return outerArray;
   };
 
+  function getBlockArray(){
+    let arr1=[];
+    let arr=[];
+    let value;
+    let innerLoopStart =1;
+    let outerLoopStart =1;
+    let end = 4;
+    let initialValue =1;
+    for(outerLoopStart; outerLoopStart < 10; outerLoopStart++){
+      if( outerLoopStart == 4 || outerLoopStart == 7){
+        arr1.push(arr);
+        arr =[];
+      }
+      for(innerLoopStart; innerLoopStart < end; innerLoopStart++){
+        if($(`.grid${outerLoopStart}-${innerLoopStart}`).text() == ""){
+          value = 0;
+        }else{
+          value = $(`.grid${outerLoopStart}-${innerLoopStart}`).text();
+        }
+        arr.push(value);
+      }
+
+      if(outerLoopStart == 9 && innerLoopStart > 9){
+        arr1.push(arr);
+        break;
+      }
+      innerLoopStart = initialValue;
+      if(outerLoopStart == 9 && end !=9 ){
+        arr1.push(arr);
+        arr =[];
+        initialValue = innerLoopStart+ 3;
+        innerLoopStart =initialValue;
+        end = end + 3;
+        outerLoopStart = 0;
+      }
+    }
+    return arr1;
+  }
+
 
   $('#display').click(function(event){
     event.preventDefault();
@@ -65,9 +104,11 @@ $(document).ready(function(){
     let result;
     let columnGridArray = getColumnGridArray();
     let rowGridArray = getRowGridArray();
+    let blockGridArray = getBlockArray();
     let resultForRow = sudoku.verifyArray(rowGridArray);
     let resultForColumn = sudoku.verifyArray(columnGridArray);
-    if (resultForRow == "Unvalid" || resultForColumn =="Unvalid"){
+    let resultForBlock = sudoku.verifyArray(blockGridArray);
+    if (resultForRow == "Unvalid" || resultForColumn =="Unvalid" || resultForBlock== "Unvalid"){
       $('#result').append("Its an Unvalid Sudoku");
     }else{
       $('#result').append("Its a Valid Sudoku");

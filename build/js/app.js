@@ -93,6 +93,45 @@ $(document).ready(function () {
     return outerArray;
   };
 
+  function getBlockArray() {
+    var arr1 = [];
+    var arr = [];
+    var value = void 0;
+    var innerLoopStart = 1;
+    var outerLoopStart = 1;
+    var end = 4;
+    var initialValue = 1;
+    for (outerLoopStart; outerLoopStart < 10; outerLoopStart++) {
+      if (outerLoopStart == 4 || outerLoopStart == 7) {
+        arr1.push(arr);
+        arr = [];
+      }
+      for (innerLoopStart; innerLoopStart < end; innerLoopStart++) {
+        if ($('.grid' + outerLoopStart + '-' + innerLoopStart).text() == "") {
+          value = 0;
+        } else {
+          value = $('.grid' + outerLoopStart + '-' + innerLoopStart).text();
+        }
+        arr.push(value);
+      }
+
+      if (outerLoopStart == 9 && innerLoopStart > 9) {
+        arr1.push(arr);
+        break;
+      }
+      innerLoopStart = initialValue;
+      if (outerLoopStart == 9 && end != 9) {
+        arr1.push(arr);
+        arr = [];
+        initialValue = innerLoopStart + 3;
+        innerLoopStart = initialValue;
+        end = end + 3;
+        outerLoopStart = 0;
+      }
+    }
+    return arr1;
+  }
+
   $('#display').click(function (event) {
     event.preventDefault();
     var gridSelector = $('#gridSelector').val();
@@ -106,9 +145,11 @@ $(document).ready(function () {
     var result = void 0;
     var columnGridArray = getColumnGridArray();
     var rowGridArray = getRowGridArray();
+    var blockGridArray = getBlockArray();
     var resultForRow = sudoku.verifyArray(rowGridArray);
     var resultForColumn = sudoku.verifyArray(columnGridArray);
-    if (resultForRow == "Unvalid" || resultForColumn == "Unvalid") {
+    var resultForBlock = sudoku.verifyArray(blockGridArray);
+    if (resultForRow == "Unvalid" || resultForColumn == "Unvalid" || resultForBlock == "Unvalid") {
       $('#result').append("Its an Unvalid Sudoku");
     } else {
       $('#result').append("Its a Valid Sudoku");
