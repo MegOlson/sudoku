@@ -1,4 +1,4 @@
-Sudoku = require('./../js/suduko.js').sudokuModule;
+var Sudoku = require('./../js/suduko.js').sudokuModule;
 
 $(document).ready(function(){
   gridMaker();
@@ -6,7 +6,7 @@ $(document).ready(function(){
     for(var i = 1; i < 10; i++){
       $('.sudokuGrid').append('<div class="col-sm-12 col'+i+'"></div>');
       for(var j = 1; j < 10; j++){
-        $('#gridSelector').append('<option value="grid'+i+'-'+j+'">Row '+i+' col '+j+' </option>')
+        $('#gridSelector').append('<option value="grid'+i+'-'+j+'">Row '+i+' col '+j+' </option>');
         $('.col'+i).append('<li class="grid'+i+'-'+j+'"></li>');
       }
     }

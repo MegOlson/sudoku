@@ -1,10 +1,10 @@
 function Sudoku() {
 
-};
+}
 
 Sudoku.prototype.verifyArray = function (array) {
   var arr =[];
-  var returnData = "Valid"
+  var returnData = "Valid";
   array.forEach(function(innerArray) {
     arr = [];
     innerArray.forEach(function(innerArrayValue) {
@@ -15,7 +15,6 @@ Sudoku.prototype.verifyArray = function (array) {
           arr.push(innerArrayValue);
         }
       }
-
     });
   });
   return returnData;
